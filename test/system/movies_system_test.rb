@@ -6,8 +6,17 @@ class MoviesSystemTest < ApplicationSystemTestCase
     # when I visit /movies/1
     visit("/movies/1") # visit("/movies/1")
     # I see the title of the movie "Parasite"
-    assert_text("Parasite")
+    assert_text "Parasite"
     # I also see the name of the director "Bong Joon-ho"
     assert_text "Bong Joon-ho"
+  end
+  test "visiting titanic" do
+    # As a user,
+    # when I visit /movies/1
+    visit("/movies/2") # visit("/movies/1")
+    # I see the title of the movie "Parasite"
+    assert_text "Titanic"
+    # I also see the name of the director "Bong Joon-ho"
+    assert_text "Cameron"
   end
 end
