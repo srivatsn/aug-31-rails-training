@@ -2,6 +2,9 @@ require "application_system_test_case"
 
 class MoviesSystemTest < ApplicationSystemTestCase
   test "visiting the show" do
+    hash = {title: "Parasite", director: "Bong Joon-ho"}
+    Movie.new(hash)
+    
     # As a user,
     # when I visit /movies/1
     visit("/movies/1") # visit("/movies/1")
@@ -18,5 +21,6 @@ class MoviesSystemTest < ApplicationSystemTestCase
     assert_text "Titanic"
     # I also see the name of the director "Bong Joon-ho"
     assert_text "Cameron"
+  end
   end
 end
