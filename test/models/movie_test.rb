@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class MovieTest < ActiveSupport::TestCase
+    setup do
+        Movie.new(title: "Titanic", director: "Cameron", facebook_likes: 10, year: "2000").save
+        Movie.new(title: "Titanic2", director: "Cameron2", facebook_likes: 1, year: "2015").save
+    end
+
     test "movid is valid with a title" do
         movie = Movie.new(title: "Titanic", director: "Cameron")
         
@@ -12,4 +17,29 @@ class MovieTest < ActiveSupport::TestCase
         movie = Movie.new(title: "", director: "Cameron")
         refute movie.valid?
     end
+
+    test "with_facebook_likes" do
+        count = Movie.with_facebook_likes(5).count
+        assert_equal 1, count
+    end
+
+    test "titles" do
+        titles = Movie.titles()
+        assert_equal ["Titanic", "Titanic2"], titles
+    end
+
+    test "by_director_after_2010" do
+        count = Movie.by_director_after_2010("Cameron").count
+        assert_equal 1, count
+    end
+
+    test "year_by_title" do
+        year = Movie.year_by_title("Titanic")
+        assert_equal "2000", year
+    end
+
+    test "by_most_facebook_likes" do
+        movie = Movie.by_most_facebook_likes().first
+        assert_equal 10, movie.facebook_likes
+    end   
 end

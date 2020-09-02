@@ -1,13 +1,41 @@
 class MoviesController < ApplicationController
-  def show
-    if params[:id] == "1" then
-      title = "Parasite"
-      director = "Bong Joon-ho"    
-    else
-      title = "Titanic"
-      director = "Cameron"          
-    end
+  skip_before_action :verify_authenticity_token
 
-    render :show, locals: { title: title, director: director}
+  def index
+    movies = Movie.all
+    render locals: { movies: movies}
+  end
+
+  def show
+
+    movie = Movie.find(params[:id])
+    render locals: { movie: movie }
+  end
+
+  def new
+    movie = Movie.new
+    render locals: { movie: movie }
+  end
+
+  def create
+    movie = Movie.create(movie_params)
+
+    redirect_to "/movies/#{movie.id}", locals: {movie: movie}
+  end
+
+  def edit
+    movie = Movie.find(params[:id])
+    render locals: { movie: movie }
+  end
+
+  def update
+    movie = Movie.update(params[:id], movie_params)
+    redirect_to "/movies/#{movie.id}", locals: {movie: movie}
+  end
+
+  private 
+  
+  def movie_params
+    params.require(:movie).permit(:title, :director, :year)
   end
 end
