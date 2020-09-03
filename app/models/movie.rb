@@ -1,6 +1,8 @@
 class Movie < ApplicationRecord
     validates_presence_of :title
 
+    enum color_format: [:color, :black_and_white]
+    
     def self.with_facebook_likes(x)
         where("facebook_likes > ?", x)
     end

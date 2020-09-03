@@ -6,6 +6,21 @@ class MovieTest < ActiveSupport::TestCase
         Movie.new(title: "Titanic2", director: "Cameron2", facebook_likes: 1, year: "2015").save
     end
 
+    test "movie has a color format" do
+        movie = create(:movie)
+    
+        assert movie.color?, "should be color"
+        refute movie.black_and_white?, "should not be black and white"
+        assert_equal "color", movie.color_format
+    
+        movie.black_and_white!
+    
+        assert movie.black_and_white?, "should be black and white"
+        refute movie.color?, "should not be color"
+    
+        assert_equal "black_and_white", movie.color_format
+      end
+
     test "movid is valid with a title" do
         movie = Movie.new(title: "Titanic", director: "Cameron")
         
