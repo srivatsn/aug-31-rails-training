@@ -13,12 +13,4 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   FactoryBot.reload
-
-  FactoryBot.define do
-    factory :movie do
-      title { Faker::Movie.title }
-      year  { Faker::Date.backward(days:10000).year }
-      plot_keywords { Faker::Lorem.words }
-    end
-  end
 end

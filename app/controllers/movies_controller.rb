@@ -1,13 +1,10 @@
 class MoviesController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def index
     movies = Movie.all
-    render locals: { movies: movies}
+    render locals: { movies: movies }
   end
 
   def show
-
     movie = Movie.find(params[:id])
     render locals: { movie: movie }
   end
@@ -20,21 +17,24 @@ class MoviesController < ApplicationController
   def create
     movie = Movie.create(movie_params)
 
-    redirect_to "/movies/#{movie.id}", locals: {movie: movie}
+    redirect_to "/movies/#{movie.id}"
   end
 
   def edit
     movie = Movie.find(params[:id])
+
     render locals: { movie: movie }
   end
 
   def update
-    movie = Movie.update(params[:id], movie_params)
-    redirect_to "/movies/#{movie.id}", locals: {movie: movie}
+    movie = Movie.find(params[:id])
+    movie.update(movie_params)
+
+    redirect_to "/movies/#{movie.id}"
   end
 
-  private 
-  
+  private
+
   def movie_params
     params.require(:movie).permit(:title, :director, :year)
   end
