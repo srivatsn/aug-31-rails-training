@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_203622) do
+ActiveRecord::Schema.define(version: 2020_09_04_215953) do
+
+  create_table "actors", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.boolean "oscar_nominee", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "casts", force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "movie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["actor_id"], name: "index_casts_on_actor_id"
+    t.index ["movie_id"], name: "index_casts_on_movie_id"
+  end
 
   create_table "directors", force: :cascade do |t|
     t.string "name"
@@ -27,5 +44,7 @@ ActiveRecord::Schema.define(version: 2020_09_04_203622) do
     t.index ["director_id"], name: "index_movies_on_director_id"
   end
 
+  add_foreign_key "casts", "actors"
+  add_foreign_key "casts", "movies"
   add_foreign_key "movies", "directors"
 end

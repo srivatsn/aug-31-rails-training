@@ -78,4 +78,10 @@ class MovieTest < ActiveSupport::TestCase
     assert_equal [movie_1, movie_3], Movie.more_fb_likes_than(43)
   end
 
+  test "movie has many actors" do
+    movie = create(:movie)
+
+    assert movie.actors.empty?
+  end
+
 end

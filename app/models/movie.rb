@@ -1,7 +1,9 @@
 class Movie < ApplicationRecord
     validates_presence_of :title
-        
+    
     belongs_to :director
+    has_many :casts
+    has_many :actors, through: :casts
     def self.fancy_enum(definitions) 
         definitions.each do |name, values|
             pairs = values.each_with_index
