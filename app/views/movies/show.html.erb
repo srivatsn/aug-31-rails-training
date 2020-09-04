@@ -1,5 +1,7 @@
 <h3><%= movie.title %></h3>
-<h4><%= movie.director %></h4>
+<h4><%= movie.director.name %></h4>
+<h4><%= movie.producer.name %></h4>
 <h4><%= movie.year %></h4>
+<h4># of Actors in <%= movie.title %>: <%= movie.actors.count %></h4>
 
 <%= button_to "Edit #{movie.title}", "/movies/#{movie.id}/edit", method: :get%>

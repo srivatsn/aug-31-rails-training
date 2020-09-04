@@ -3,5 +3,6 @@
 
 <% movies.each do |movie| %>
     <h3><%= movie.title %></h3>
-    <h4><%= movie.director %></h4>
+    <h4><%= movie.director.name %></h4>
+    <h4><%= movie.producer.name %></h4>
 <% end %>

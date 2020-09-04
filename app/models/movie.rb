@@ -2,8 +2,10 @@ class Movie < ApplicationRecord
     validates_presence_of :title
     
     belongs_to :director
+    belongs_to :producer
     has_many :casts
     has_many :actors, through: :casts
+
     def self.fancy_enum(definitions) 
         definitions.each do |name, values|
             pairs = values.each_with_index
@@ -50,4 +52,11 @@ class Movie < ApplicationRecord
         Movie.find_by(title: title).year
     end
 
+    def director_name
+        director.name
+    end
+
+    def producer_name
+        producer.name
+    end
 end

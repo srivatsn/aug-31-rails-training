@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_04_215953) do
+ActiveRecord::Schema.define(version: 2020_09_04_224430) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name"
@@ -41,10 +41,20 @@ ActiveRecord::Schema.define(version: 2020_09_04_215953) do
     t.integer "facebook_likes"
     t.integer "color_format", default: 0
     t.integer "director_id"
+    t.integer "producer_id"
     t.index ["director_id"], name: "index_movies_on_director_id"
+    t.index ["producer_id"], name: "index_movies_on_producer_id"
+  end
+
+  create_table "producers", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "casts", "actors"
   add_foreign_key "casts", "movies"
   add_foreign_key "movies", "directors"
+  add_foreign_key "movies", "producers"
 end
